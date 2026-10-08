@@ -41,7 +41,43 @@ Escalate to a human for dosing or medical advice, pregnancy, drug interactions, 
 20 fixed test scripts: 15 with planted violations and 5 clean. The scripts and rules were not tuned to improve the score.
 
 <!-- EVAL:START -->
-_Not run yet. Run `node cli.js eval` to fill this in with real numbers._
+
+Run: 10/7/2026, 7:25:40 PM CT. Cheap model `claude-haiku-4-5-20251001`, strong model `claude-sonnet-5-5`.
+
+| Metric | Result |
+|---|---|
+| Violations caught | 13 of 15 (87%) |
+| False positives on clean scripts | 0 of 5 |
+| Planted rules identified | 21 of 24 |
+| Escalated to a human | 1 |
+| Routed to the strong model | 1 |
+| Average cost per script | $0.0024 (about $2.42 per 1,000 ads) |
+| Average time per script | 1.9 s |
+
+| ID | Expected | Got | Model | Rules planted | Rules found | Correct |
+|---|---|---|---|---|---|---|
+| T01 | flag | fix | claude-haiku-4-5-20251001 | R1, R9 | R1, R2, R9 | Yes |
+| T02 | flag | fix | claude-haiku-4-5-20251001 | R2, R5 | R2, R5 | Yes |
+| T03 | flag | pass | claude-haiku-4-5-20251001 | R6 | none | No |
+| T04 | flag | fix | claude-haiku-4-5-20251001 | R4, R5 | R4, R1, R5 | Yes |
+| T05 | flag | fix | claude-haiku-4-5-20251001 | R5 | R5 | Yes |
+| T06 | flag | fix | claude-haiku-4-5-20251001 | R3 | R3 | Yes |
+| T07 | flag | fix | claude-haiku-4-5-20251001 | R8 | R8 | Yes |
+| T08 | flag | fix | claude-haiku-4-5-20251001 | R7 | R7, R2 | Yes |
+| T09 | flag | fix | claude-haiku-4-5-20251001 | R9 | R9 | Yes |
+| T10 | flag | escalate | claude-sonnet-5-5 (routed) | ESCALATE | ESCALATE, R3, R5 | Yes |
+| T11 | flag | fix | claude-haiku-4-5-20251001 | R2, ESCALATE | R2 | Yes |
+| T12 | flag | fix | claude-haiku-4-5-20251001 | R1 | R1 | Yes |
+| T13 | flag | fix | claude-haiku-4-5-20251001 | R7, R3, R6, R5 | R7, R1, R3, R5, R6 | Yes |
+| T14 | flag | pass | claude-haiku-4-5-20251001 | ESCALATE | none | No |
+| T15 | flag | fix | claude-haiku-4-5-20251001 | R8, R1, R9 | R1, R8, R9 | Yes |
+| C01 | pass | pass | claude-haiku-4-5-20251001 | none | none | Yes |
+| C02 | pass | pass | claude-haiku-4-5-20251001 | none | none | Yes |
+| C03 | pass | pass | claude-haiku-4-5-20251001 | none | none | Yes |
+| C04 | pass | pass | claude-haiku-4-5-20251001 | none | none | Yes |
+| C05 | pass | pass | claude-haiku-4-5-20251001 | none | none | Yes |
+
+_Costs are estimates from token counts and configured per-model prices._
 <!-- EVAL:END -->
 
 ## Stack
