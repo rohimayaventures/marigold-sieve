@@ -88,6 +88,7 @@ textarea{min-height:140px;resize:vertical}
 .rule{font-weight:700;font-size:13px;background:var(--g900);color:#fff;border-radius:7px;padding:2px 8px}
 .sev{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 .sev.high{color:var(--red)} .sev.medium{color:var(--clay)} .sev.low{color:var(--muted)}
+.guardrail{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--g700);background:var(--mint);border:1px solid #cfe5da;border-radius:999px;padding:2px 8px}
 .quote{color:var(--red);font-style:italic}
 .why{color:var(--text2);font-size:15px;margin:2px 0 0}
 .original{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:14px 16px;white-space:pre-wrap;color:var(--text2)}
@@ -312,7 +313,7 @@ footer p{max-width:720px;margin:0 auto}
     if (r.issues && r.issues.length){
       h += '<div class="section-label">Issues (' + r.issues.length + ')</div><ul class="issues">';
       r.issues.forEach(function(i){
-        h += '<li class="issue"><div class="head"><span class="rule">' + esc(i.rule) + '</span><span class="sev ' + esc(i.severity) + '">' + esc(i.severity) + '</span></div>' +
+        h += '<li class="issue"><div class="head"><span class="rule">' + esc(i.rule) + '</span><span class="sev ' + esc(i.severity) + '">' + esc(i.severity) + '</span>' + (i.guardrail ? '<span class="guardrail">Rule-based check</span>' : '') + '</div>' +
           (i.quote ? '<div class="quote">&ldquo;' + esc(i.quote) + '&rdquo;</div>' : '') +
           '<p class="why">' + esc(i.why) + '</p></li>';
       });

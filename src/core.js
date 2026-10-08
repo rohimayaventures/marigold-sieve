@@ -160,6 +160,47 @@ async function runReviewModel(config, model, input) {
   return { parsed, inputTokens: r.inputTokens, outputTokens: r.outputTokens, ms: Date.now() - t0, model };
 }
 
+// Deterministic checks after the model answer. They do not change the prompt or routing.
+const DISCLOSURE_RE = /#ad|paid partnership|#sponsored/i;
+const CLINICAL_RE = /\b(?:pregnant|pregnancy|breastfeeding)\b|trying to conceive|\b\d+(?:\.\d+)?\s*(?:milligrams|mcg|mg|units)\b|\b(?:dose|dosing)\b|side effect|\binteraction/i;
+
+export function applyGuardrails(input, result) {
+  const script = String(input.script || '');
+  const caption = String(input.caption || '');
+  const text = `${script}\n${caption}`;
+  const issues = result.issues.map((i) => ({ ...i }));
+  let status = result.status;
+  let rewritten = result.rewritten_script;
+
+  if (input.contentType === 'ambassador' && !DISCLOSURE_RE.test(text)) {
+    issues.push({
+      rule: 'R6',
+      quote: caption,
+      why: 'Ambassador content must include #ad or a paid partnership disclosure.',
+      severity: 'high',
+      guardrail: true,
+    });
+    if (status === 'pass') {
+      status = 'fix';
+      rewritten = `${script}\n${caption} #ad`;
+    }
+  }
+
+  const clinical = text.match(CLINICAL_RE);
+  if (clinical) {
+    status = 'escalate';
+    issues.push({
+      rule: 'ESCALATE',
+      quote: clinical[0],
+      why: 'Clinical content (pregnancy, dosing, side effects, or interactions) always requires human review.',
+      severity: 'high',
+      guardrail: true,
+    });
+  }
+
+  return { ...result, status, issues, rewritten_script: rewritten };
+}
+
 function systemEscalation(reason) {
   return {
     status: 'escalate',
@@ -228,6 +269,8 @@ export async function reviewScript(config, input) {
       modelUsed = 'system-fallback';
     }
   }
+
+  final = applyGuardrails(input, final);
 
   const inputTokens = calls.reduce((s, c) => s + c.inputTokens, 0);
   const outputTokens = calls.reduce((s, c) => s + c.outputTokens, 0);

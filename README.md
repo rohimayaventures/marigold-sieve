@@ -42,34 +42,34 @@ Escalate to a human for dosing or medical advice, pregnancy, drug interactions, 
 
 <!-- EVAL:START -->
 
-Run: 10/7/2026, 7:25:40 PM CT. Cheap model `claude-haiku-4-5-20251001`, strong model `claude-sonnet-5-5`.
+Run: 10/7/2026, 8:56:25 PM CT. Cheap model `claude-haiku-4-5-20251001`, strong model `claude-sonnet-5-5`.
 
 | Metric | Result |
 |---|---|
-| Violations caught | 13 of 15 (87%) |
+| Violations caught | 15 of 15 (100%) |
 | False positives on clean scripts | 0 of 5 |
-| Planted rules identified | 21 of 24 |
-| Escalated to a human | 1 |
+| Planted rules identified | 23 of 24 |
+| Escalated to a human | 3 |
 | Routed to the strong model | 1 |
-| Average cost per script | $0.0024 (about $2.42 per 1,000 ads) |
-| Average time per script | 1.9 s |
+| Average cost per script | $0.0022 (about $2.23 per 1,000 ads) |
+| Average time per script | 2.0 s |
 
 | ID | Expected | Got | Model | Rules planted | Rules found | Correct |
 |---|---|---|---|---|---|---|
 | T01 | flag | fix | claude-haiku-4-5-20251001 | R1, R9 | R1, R2, R9 | Yes |
 | T02 | flag | fix | claude-haiku-4-5-20251001 | R2, R5 | R2, R5 | Yes |
-| T03 | flag | pass | claude-haiku-4-5-20251001 | R6 | none | No |
+| T03 | flag | fix | claude-haiku-4-5-20251001 | R6 | R6 | Yes |
 | T04 | flag | fix | claude-haiku-4-5-20251001 | R4, R5 | R4, R1, R5 | Yes |
 | T05 | flag | fix | claude-haiku-4-5-20251001 | R5 | R5 | Yes |
-| T06 | flag | fix | claude-haiku-4-5-20251001 | R3 | R3 | Yes |
+| T06 | flag | escalate | claude-haiku-4-5-20251001 | R3 | R3, ESCALATE | Yes |
 | T07 | flag | fix | claude-haiku-4-5-20251001 | R8 | R8 | Yes |
 | T08 | flag | fix | claude-haiku-4-5-20251001 | R7 | R7, R2 | Yes |
 | T09 | flag | fix | claude-haiku-4-5-20251001 | R9 | R9 | Yes |
-| T10 | flag | escalate | claude-sonnet-5-5 (routed) | ESCALATE | ESCALATE, R3, R5 | Yes |
+| T10 | flag | escalate | claude-sonnet-5-5 (routed) | ESCALATE | ESCALATE, R5, R3 | Yes |
 | T11 | flag | fix | claude-haiku-4-5-20251001 | R2, ESCALATE | R2 | Yes |
 | T12 | flag | fix | claude-haiku-4-5-20251001 | R1 | R1 | Yes |
 | T13 | flag | fix | claude-haiku-4-5-20251001 | R7, R3, R6, R5 | R7, R1, R3, R5, R6 | Yes |
-| T14 | flag | pass | claude-haiku-4-5-20251001 | ESCALATE | none | No |
+| T14 | flag | escalate | claude-haiku-4-5-20251001 | ESCALATE | ESCALATE | Yes |
 | T15 | flag | fix | claude-haiku-4-5-20251001 | R8, R1, R9 | R1, R8, R9 | Yes |
 | C01 | pass | pass | claude-haiku-4-5-20251001 | none | none | Yes |
 | C02 | pass | pass | claude-haiku-4-5-20251001 | none | none | Yes |
