@@ -2,7 +2,7 @@
 
 **A creative compliance agent for health and wellness ads. A concept by Hannah Kraulik Pagade.**
 
-Live demo: https://marigold-sieve.YOUR-SUBDOMAIN.workers.dev
+Live demo: https://marigold-sieve.rohimayapublishing.workers.dev
 
 > First-pass screen to support human reviewers. Not legal or medical advice. Independent concept, not a commercial product. Sample scripts only; no patient data.
 
