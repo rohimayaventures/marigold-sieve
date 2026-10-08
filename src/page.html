@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creative Compliance Agent</title>
+<meta name="description" content="A concept by Hannah Kraulik Pagade. Drafts Meta ad copy and screens it for health-advertising risk before it ships.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBFAF5; --band:#F5F1E8; --border:#ECE7DB; --border2:#E7E0D1;
+  --g900:#0F2A20; --g700:#1C4429; --g600:#2F6B43; --g300:#6FB39B; --mint:#EAF4EF;
+  --text:#1E2A23; --text2:#4A574F; --muted:#7C887F; --clay:#C67E57; --red:#C82414;
+  --card:#FFFFFF; --radius:22px;
+  --shadow:0 1px 2px rgba(15,42,32,.04),0 8px 28px rgba(28,68,41,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.55;overflow-x:hidden}
+a{color:var(--g600)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.topbar{background:var(--g900);color:#fff;font-size:13px;letter-spacing:.01em;text-align:center;padding:9px 16px}
+.topbar strong{font-weight:600}
+
+/* Hero */
+.hero{padding:56px 0 36px;display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:end}
+.eyebrow{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--g600);background:var(--mint);border-radius:999px;padding:6px 12px;margin-bottom:18px}
+h1{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(44px,7vw,76px);line-height:1.02;letter-spacing:-.02em;margin:0 0 16px;color:var(--g900)}
+h1 em{color:var(--g600);font-style:italic}
+.lede{color:var(--text2);font-size:18px;max-width:560px;margin:0}
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.facts li{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;font-size:15px;color:var(--text2);box-shadow:var(--shadow);display:flex;gap:12px;align-items:center}
+.facts b{font-family:"Newsreader",serif;font-weight:400;font-size:26px;color:var(--g700);min-width:28px;line-height:1}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:8px 0 40px;padding:0;list-style:none}
+.step{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.num{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--g900);color:#fff;font-weight:600;font-size:14px;margin-bottom:12px}
+.step h3{margin:0 0 4px;font-size:16px;font-weight:600}
+.step p{margin:0;font-size:14px;color:var(--text2)}
+
+/* Band + cards */
+.band{background:var(--band);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+.card + .card{margin-top:20px}
+h2{font-family:"Newsreader",serif;font-weight:300;font-size:32px;line-height:1.15;margin:0 0 6px;color:var(--g900)}
+h2 em{font-style:italic;color:var(--g600)}
+.sub{color:var(--text2);margin:0 0 20px}
+
+/* Tabs */
+.tabs{display:inline-flex;gap:6px;background:var(--band);border:1px solid var(--border2);border-radius:999px;padding:5px;margin-bottom:22px}
+.tab{border:0;background:transparent;color:var(--text2);font:inherit;font-weight:600;font-size:15px;padding:10px 18px;border-radius:999px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--g700);color:#fff}
+.tab:focus-visible,.btn:focus-visible,.chip:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--g300);outline-offset:2px}
+
+/* Form */
+label{display:block;font-size:14px;font-weight:600;color:var(--text);margin:0 0 6px}
+.field{margin-bottom:16px}
+textarea,input[type=text],select{width:100%;font:inherit;font-size:16px;color:var(--text);background:#fff;border:1px solid var(--border2);border-radius:14px;padding:12px 14px}
+textarea{min-height:140px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.samples{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;align-items:center}
+.samples span{font-size:13px;color:var(--muted);margin-right:4px}
+.chip{border:1px solid var(--border2);background:var(--bg);color:var(--g700);font:inherit;font-size:14px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer}
+.chip:hover{background:var(--mint)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--g700);color:#fff;font:inherit;font-weight:600;font-size:16px;padding:14px 26px;border-radius:999px;cursor:pointer;box-shadow:0 6px 18px rgba(28,68,41,.18)}
+.btn:hover{background:var(--g900)}
+.btn[disabled]{opacity:.6;cursor:progress}
+.btn.ghost{background:transparent;color:var(--g700);border:1px solid var(--border2);box-shadow:none}
+.count{font-size:12px;color:var(--muted);text-align:right;margin-top:4px}
+.hidden{display:none !important}
+
+/* Result */
+.badge{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border-radius:999px;color:#fff}
+.badge.pass{background:var(--g600)}
+.badge.fix{background:var(--clay)}
+.badge.escalate{background:var(--red)}
+.mockflag{display:inline-block;margin-left:8px;background:#fff3cd;color:#6b4e00;border:1px solid #f0d58a;border-radius:999px;font-size:12px;font-weight:700;padding:6px 12px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.pill{font-size:13px;color:var(--text2);background:var(--band);border:1px solid var(--border);border-radius:999px;padding:5px 12px}
+.pill b{color:var(--text);font-weight:600}
+.section-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:24px 0 10px}
+.issues{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.issue{border:1px solid var(--border);border-radius:16px;padding:14px 16px;background:#fff}
+.issue .head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.rule{font-weight:700;font-size:13px;background:var(--g900);color:#fff;border-radius:7px;padding:2px 8px}
+.sev{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.sev.high{color:var(--red)} .sev.medium{color:var(--clay)} .sev.low{color:var(--muted)}
+.quote{color:var(--red);font-style:italic}
+.why{color:var(--text2);font-size:15px;margin:2px 0 0}
+.original{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:14px 16px;white-space:pre-wrap;color:var(--text2)}
+.original del{color:var(--red);text-decoration-thickness:2px}
+.rewrite{background:var(--mint);border:1px solid #cfe5da;border-radius:16px;padding:16px 18px;white-space:pre-wrap;color:var(--g900)}
+pre.ticket{background:var(--g900);color:#d9efe4;border-radius:16px;padding:16px;overflow:auto;font-size:13px;line-height:1.5;max-height:420px;white-space:pre-wrap;word-break:break-word}
+.allclear{color:var(--g600);font-weight:600;margin:16px 0 0}
+.error{background:#fdecea;border:1px solid #f5c2bd;color:#7a1a10;border-radius:14px;padding:12px 14px;margin-top:14px}
+.draft-out .hooks{margin:6px 0 0;padding-left:20px}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Eval */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0 20px}
+.metric{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:14px}
+.metric .v{font-family:"Newsreader",serif;font-size:30px;font-weight:400;color:var(--g700);line-height:1.1}
+.metric .l{font-size:13px;color:var(--text2)}
+.tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:16px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+th{background:var(--band);font-weight:600;color:var(--text2);font-size:13px}
+tr:last-child td{border-bottom:0}
+td.ok{color:var(--g600);font-weight:600} td.miss{color:var(--red);font-weight:600}
+
+footer{padding:36px 0 48px;color:var(--muted);font-size:14px;text-align:center}
+footer p{max-width:720px;margin:0 auto}
+
+/* Tablet */
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr;gap:24px}
+  .steps{grid-template-columns:1fr 1fr}
+  .steps .step:nth-child(5){grid-column:1 / -1}
+  .metrics{grid-template-columns:1fr 1fr}
+}
+/* Phone */
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  .hero{padding:36px 0 24px}
+  .steps{grid-template-columns:1fr}
+  .card{padding:20px}
+  .tabs{display:flex;width:100%}
+  .tab{flex:1;padding:10px 8px;font-size:14px}
+  .row{grid-template-columns:1fr}
+  .btn{width:100%}
+  h2{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="topbar">Concept by <strong>Hannah Kraulik Pagade</strong> · Sample data only</div>
+
+<main>
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Creative compliance agent</span>
+      <h1>Ship creative. <em>Safely.</em></h1>
+      <p class="lede">Draft Meta ad copy and screen it against 9 health-advertising rules before it ships, with a human in the loop whenever the model is unsure.</p>
+    </div>
+    <ul class="facts">
+      <li><b>9</b> compliance rules checked</li>
+      <li><b>2</b> models, routed by confidence</li>
+      <li><b>?</b> Uncertain? A human decides.</li>
+    </ul>
+  </section>
+
+  <ol class="steps">
+    <li class="step"><span class="num">1</span><h3>Topic</h3><p>Start from a science topic, or paste a finished script.</p></li>
+    <li class="step"><span class="num">2</span><h3>Draft</h3><p>A fast model writes a 30-second script, 3 hooks, and a caption.</p></li>
+    <li class="step"><span class="num">3</span><h3>Review</h3><p>The script is screened against 9 rules and returned as JSON.</p></li>
+    <li class="step"><span class="num">4</span><h3>Decide</h3><p>Pass, fix with a compliant rewrite, or escalate to a person.</p></li>
+    <li class="step"><span class="num">5</span><h3>Route and log</h3><p>Low confidence goes to a stronger model. Escalations become a Zendesk-format ticket. Every run is logged with cost.</p></li>
+  </ol>
+</div>
+
+<div class="band">
+<div class="wrap">
+  <div class="card" id="workbench">
+    <div class="tabs" role="tablist" aria-label="Mode">
+      <button class="tab" role="tab" id="tab-check" aria-selected="true" aria-controls="panel-check">Check a script</button>
+      <button class="tab" role="tab" id="tab-draft" aria-selected="false" aria-controls="panel-draft">Draft from a topic</button>
+    </div>
+
+    <section id="panel-check" role="tabpanel" aria-labelledby="tab-check">
+      <div class="samples"><span>Try a sample:</span>
+        <button class="chip" data-sample="cure">Cure claim</button>
+        <button class="chip" data-sample="noad">Ambassador, no #ad</button>
+        <button class="chip" data-sample="dosing">Dosing advice</button>
+        <button class="chip" data-sample="clean">Clean</button>
+      </div>
+      <form id="check-form" novalidate>
+        <div class="field">
+          <label for="script">Ad script</label>
+          <textarea id="script" maxlength="2000" placeholder="Paste a voiceover script..." required></textarea>
+          <div class="count"><span id="script-count">0</span> / 2,000</div>
+        </div>
+        <div class="field">
+          <label for="caption">Caption</label>
+          <input type="text" id="caption" maxlength="2000" placeholder="Social caption">
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="contentType">Content type</label>
+            <select id="contentType">
+              <option value="brand">Brand voice</option>
+              <option value="ambassador">Ambassador / creator</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="productKind">Product kind</label>
+            <select id="productKind">
+              <option value="supplement">Supplement</option>
+              <option value="rx_compounded">Compounded prescription</option>
+              <option value="service">Service</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" type="submit" id="check-btn">Run compliance check</button>
+        <div id="check-error" class="error hidden" role="alert"></div>
+      </form>
+    </section>
+
+    <section id="panel-draft" role="tabpanel" aria-labelledby="tab-draft" class="hidden">
+      <form id="draft-form" novalidate>
+        <div class="field">
+          <label for="topic">Science topic</label>
+          <input type="text" id="topic" maxlength="300" placeholder="e.g. NAD+ and cellular energy">
+        </div>
+        <button class="btn" type="submit" id="draft-btn">Draft creative</button>
+        <div id="draft-error" class="error hidden" role="alert"></div>
+      </form>
+      <div id="draft-out" class="draft-out hidden"></div>
+    </section>
+  </div>
+
+  <div class="card hidden" id="result" tabindex="-1" aria-live="polite"></div>
+</div>
+</div>
+
+<div class="wrap" style="padding-top:40px">
+  <div class="card" id="eval">
+    <h2>Latest <em>evaluation</em></h2>
+    <p class="sub">20 fixed test scripts: 15 with planted violations, 5 clean. Real model runs, not hand-picked.</p>
+    <div id="eval-body"><p class="sub">Loading...</p></div>
+  </div>
+</div>
+</main>
+
+<footer class="wrap">
+  <p>First-pass screen to support human reviewers. Not legal or medical advice. Independent concept, not a commercial product. Sample scripts only; no patient data.</p>
+</footer>
+
+<script>
+(function(){
+  var SAMPLES = {
+    cure: {script:"Feeling sluggish by 2 PM? Our NAD+ support supplement cures chronic fatigue and reverses aging at the cellular level. Take it every morning and feel twenty again.", caption:"Your new morning ritual. Link in bio.", contentType:"brand", productKind:"supplement"},
+    noad: {script:"Okay, I've been taking this sleep support blend for a month and honestly my sleep feels deeper. It supports a healthy sleep cycle. These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.", caption:"My nighttime routine lately. Use my code SLEEP10.", contentType:"ambassador", productKind:"supplement"},
+    dosing: {script:"Start with 0.25 milligrams once a week, then double it after a month. If you feel nauseous, just push through, it passes. Talk to your provider through our app.", caption:"Your dosing guide, simplified.", contentType:"brand", productKind:"rx_compounded"},
+    clean: {script:"Take a short online quiz, and a licensed provider will review your health history. If they determine treatment is right for you, your plan ships to your door. Compounded medications are not FDA-approved. Results vary.", caption:"Care that starts with a conversation.", contentType:"brand", productKind:"rx_compounded"}
+  };
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(s){ return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+  function money(n){ n = Number(n)||0; return n < 0.01 ? "$" + n.toFixed(4) : "$" + n.toFixed(3); }
+  function secs(ms){ return ((Number(ms)||0)/1000).toFixed(1) + " s"; }
+
+  // Tabs
+  function selectTab(which){
+    var check = which === "check";
+    $("tab-check").setAttribute("aria-selected", check);
+    $("tab-draft").setAttribute("aria-selected", !check);
+    $("panel-check").classList.toggle("hidden", !check);
+    $("panel-draft").classList.toggle("hidden", check);
+  }
+  $("tab-check").addEventListener("click", function(){ selectTab("check"); });
+  $("tab-draft").addEventListener("click", function(){ selectTab("draft"); });
+
+  // Samples
+  function fill(s){
+    $("script").value = s.script; $("caption").value = s.caption;
+    $("contentType").value = s.contentType; $("productKind").value = s.productKind;
+    updateCount();
+  }
+  document.querySelectorAll("[data-sample]").forEach(function(b){
+    b.addEventListener("click", function(){ fill(SAMPLES[b.getAttribute("data-sample")]); });
+  });
+  function updateCount(){ $("script-count").textContent = $("script").value.length.toLocaleString(); }
+  $("script").addEventListener("input", updateCount);
+
+  function busy(btn, on, label){
+    btn.disabled = on;
+    btn.innerHTML = on ? '<span class="spinner" aria-hidden="true"></span> Working...' : esc(label);
+  }
+  function showError(el, msg){ el.textContent = msg; el.classList.remove("hidden"); }
+
+  async function post(path, body){
+    var res = await fetch(path, {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify(body)});
+    var data = {};
+    try { data = await res.json(); } catch(e) {}
+    if (!res.ok) throw new Error(data.error || "Something went wrong. Please try again.");
+    return data;
+  }
+
+  // Strike through flagged quotes in the original script.
+  function markOriginal(text, issues){
+    var out = esc(text);
+    (issues||[]).forEach(function(i){
+      var q = esc(i.quote || "").trim();
+      if (q.length > 2 && out.indexOf(q) !== -1 && out.indexOf("<del>" + q) === -1) out = out.replace(q, "<del>" + q + "</del>");
+    });
+    return out;
+  }
+
+  function renderResult(r, input){
+    var label = {pass:"Pass", fix:"Fix", escalate:"Escalate"}[r.status] || r.status;
+    var h = '<div><span class="badge ' + esc(r.status) + '">' + esc(label) + '</span>' + (r.mock ? '<span class="mockflag">MOCK, not real</span>' : '') + '</div>';
+    h += '<div class="pills">' +
+      '<span class="pill">Model <b>' + esc(r.model_used) + '</b></span>' +
+      '<span class="pill">Routed <b>' + (r.routed_to_strong ? "yes, to strong model" : "no") + '</b></span>' +
+      '<span class="pill">Confidence <b>' + esc(Math.round((Number(r.confidence)||0)*100)) + '%</b></span>' +
+      '<span class="pill">Cost <b>' + esc(money(r.cost_usd)) + '</b></span>' +
+      '<span class="pill">Time <b>' + esc(secs(r.latency_ms)) + '</b></span></div>';
+    if (r.issues && r.issues.length){
+      h += '<div class="section-label">Issues (' + r.issues.length + ')</div><ul class="issues">';
+      r.issues.forEach(function(i){
+        h += '<li class="issue"><div class="head"><span class="rule">' + esc(i.rule) + '</span><span class="sev ' + esc(i.severity) + '">' + esc(i.severity) + '</span></div>' +
+          (i.quote ? '<div class="quote">&ldquo;' + esc(i.quote) + '&rdquo;</div>' : '') +
+          '<p class="why">' + esc(i.why) + '</p></li>';
+      });
+      h += '</ul>';
+      h += '<div class="section-label">Original, flagged words struck through</div><div class="original">' + markOriginal(input.script, r.issues) + '</div>';
+    } else {
+      h += '<p class="allclear">No rule violations found. Ready for a final human glance.</p>';
+    }
+    if (r.rewritten_script){
+      h += '<div class="section-label">Compliant rewrite</div><div class="rewrite">' + esc(r.rewritten_script) + '</div>';
+    }
+    if (r.zendesk_ticket){
+      h += '<div class="section-label">Escalation ticket (Zendesk create-ticket format, not sent)</div><pre class="ticket">' + esc(JSON.stringify(r.zendesk_ticket, null, 2)) + '</pre>';
+    }
+    var el = $("result");
+    el.innerHTML = h;
+    el.classList.remove("hidden");
+    el.scrollIntoView({behavior:"smooth", block:"start"});
+    el.focus({preventScroll:true});
+  }
+
+  $("check-form").addEventListener("submit", async function(e){
+    e.preventDefault();
+    var btn = $("check-btn"), err = $("check-error");
+    err.classList.add("hidden");
+    var input = {script:$("script").value.trim(), caption:$("caption").value.trim(), contentType:$("contentType").value, productKind:$("productKind").value};
+    if (!input.script) return showError(err, "Please paste a script to check.");
+    busy(btn, true);
+    try { renderResult(await post("/api/check", input), input); }
+    catch(ex){ showError(err, ex.message); }
+    finally { busy(btn, false, "Run compliance check"); }
+  });
+
+  $("draft-form").addEventListener("submit", async function(e){
+    e.preventDefault();
+    var btn = $("draft-btn"), err = $("draft-error"), out = $("draft-out");
+    err.classList.add("hidden");
+    var topic = $("topic").value.trim();
+    if (!topic) return showError(err, "Please enter a topic.");
+    busy(btn, true);
+    try {
+      var d = await post("/api/draft", {topic: topic});
+      var h = (d.mock ? '<span class="mockflag">MOCK, not real</span>' : '') +
+        '<div class="section-label">30-second voiceover</div><div class="rewrite">' + esc(d.voiceover_script) + '</div>' +
+        '<div class="section-label">Hooks</div><ol class="hooks">' + (d.hooks||[]).map(function(x){ return "<li>" + esc(x) + "</li>"; }).join("") + '</ol>' +
+        '<div class="section-label">Caption</div><p>' + esc(d.caption) + '</p>' +
+        '<div class="pills"><span class="pill">Model <b>' + esc(d.model_used) + '</b></span><span class="pill">Cost <b>' + esc(money(d.cost_usd)) + '</b></span><span class="pill">Time <b>' + esc(secs(d.latency_ms)) + '</b></span></div>' +
+        '<p style="margin-top:16px"><button class="btn ghost" type="button" id="send-to-check">Check this draft</button></p>';
+      out.innerHTML = h; out.classList.remove("hidden");
+      $("send-to-check").addEventListener("click", function(){
+        fill({script:d.voiceover_script, caption:d.caption, contentType:"brand", productKind:$("productKind").value});
+        selectTab("check");
+        $("workbench").scrollIntoView({behavior:"smooth", block:"start"});
+      });
+    } catch(ex){ showError(err, ex.message); }
+    finally { busy(btn, false, "Draft creative"); }
+  });
+
+  // Eval card
+  fetch("/api/eval").then(function(r){ return r.json(); }).then(function(s){
+    var body = $("eval-body");
+    if (!s || s.status !== "ok"){ body.innerHTML = '<p class="sub">No evaluation has been run yet.</p>'; return; }
+    var m = function(v,l){ return '<div class="metric"><div class="v">' + esc(v) + '</div><div class="l">' + esc(l) + '</div></div>'; };
+    var h = '<div class="metrics">' +
+      m(s.violations_caught + " / " + s.violations_total, "Violations caught") +
+      m(s.false_positives + " / " + s.clean_total, "False positives on clean scripts") +
+      m(s.planted_rules_found + " / " + s.planted_rules_total, "Planted rules identified") +
+      m(s.escalated, "Escalated to a human") +
+      m(s.routed_to_strong, "Routed to strong model") +
+      m(money(s.avg_cost_usd), "Average cost per script") +
+      m("$" + s.cost_per_1000_ads_usd, "Estimated per 1,000 ads") +
+      m(secs(s.avg_latency_ms), "Average time per script") + '</div>';
+    h += '<div class="tablewrap"><table><thead><tr><th>ID</th><th>Expected</th><th>Got</th><th>Model</th><th>Rules planted</th><th>Rules found</th><th>Correct</th></tr></thead><tbody>';
+    (s.rows||[]).forEach(function(r){
+      h += '<tr><td>' + esc(r.id) + '</td><td>' + esc(r.expected) + '</td><td>' + esc(r.got) + '</td><td>' + esc(r.model) + (r.routed ? " (routed)" : "") + '</td><td>' + esc((r.planted||[]).join(", ") || "none") + '</td><td>' + esc((r.found||[]).join(", ") || "none") + '</td><td class="' + (r.correct ? "ok" : "miss") + '">' + (r.correct ? "Yes" : "No") + '</td></tr>';
+    });
+    h += '</tbody></table></div><p class="sub" style="margin-top:12px;font-size:13px">Run ' + esc(new Date(s.ran_at).toLocaleString("en-US")) + '. Costs are estimates from token counts.</p>';
+    body.innerHTML = h;
+  }).catch(function(){ $("eval-body").innerHTML = '<p class="sub">Evaluation results are unavailable right now.</p>'; });
+})();
+</script>
+</body>
+</html>

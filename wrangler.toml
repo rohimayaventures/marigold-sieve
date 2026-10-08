@@ -1,0 +1,14 @@
+name = "marigold-sieve"
+main = "src/worker.js"
+compatibility_date = "2025-09-01"
+
+# Model names live here, not in code. Change them and redeploy if a model is not found.
+[vars]
+CHEAP_MODEL = "claude-haiku-4-5-20251001"
+STRONG_MODEL = "claude-sonnet-5-5"
+
+# Secrets (never in this file):
+#   npx wrangler secret put ANTHROPIC_API_KEY
+# Optional Supabase logging:
+#   npx wrangler secret put SUPABASE_URL
+#   npx wrangler secret put SUPABASE_SERVICE_KEY

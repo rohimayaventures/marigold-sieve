@@ -1,0 +1,15 @@
+{
+  "name": "marigold-sieve",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "Creative Compliance Agent: drafts Meta ad copy and screens it for health-advertising risk. A concept by Hannah Kraulik Pagade.",
+  "scripts": {
+    "build": "node scripts/build-page.js",
+    "serve": "node scripts/build-page.js && node cli.js serve",
+    "eval": "node cli.js eval",
+    "deploy": "node scripts/build-page.js && npx wrangler deploy"
+  },
+  "engines": { "node": ">=18" }
+}
