@@ -99,6 +99,8 @@ pre.ticket{background:var(--g900);color:#d9efe4;border-radius:16px;padding:16px;
 .error{background:#fdecea;border:1px solid #f5c2bd;color:#7a1a10;border-radius:14px;padding:12px 14px;margin-top:14px}
 .draft-out .hooks{margin:6px 0 0;padding-left:20px}
 .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+.spinner.dark{border-color:rgba(28,68,41,.25);border-top-color:var(--g700)}
+.pending{display:flex;align-items:center;gap:10px;margin:0;color:var(--text2);font-weight:600}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* Eval */
@@ -177,6 +179,7 @@ footer p{max-width:720px;margin:0 auto}
         <button class="chip" data-sample="cure">Cure claim</button>
         <button class="chip" data-sample="noad">Ambassador, no #ad</button>
         <button class="chip" data-sample="dosing">Dosing advice</button>
+        <button class="chip" data-sample="pregnancy">Pregnancy (escalates)</button>
         <button class="chip" data-sample="clean">Clean</button>
       </div>
       <form id="check-form" novalidate>
@@ -247,6 +250,7 @@ footer p{max-width:720px;margin:0 auto}
     cure: {script:"Feeling sluggish by 2 PM? Our NAD+ support supplement cures chronic fatigue and reverses aging at the cellular level. Take it every morning and feel twenty again.", caption:"Your new morning ritual. Link in bio.", contentType:"brand", productKind:"supplement"},
     noad: {script:"Okay, I've been taking this sleep support blend for a month and honestly my sleep feels deeper. It supports a healthy sleep cycle. These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.", caption:"My nighttime routine lately. Use my code SLEEP10.", contentType:"ambassador", productKind:"supplement"},
     dosing: {script:"Start with 0.25 milligrams once a week, then double it after a month. If you feel nauseous, just push through, it passes. Talk to your provider through our app.", caption:"Your dosing guide, simplified.", contentType:"brand", productKind:"rx_compounded"},
+    pregnancy: {script:"Thinking about trying to get pregnant? Our hormone protocol is great to stay on while you try. A provider will review your quiz.", caption:"Feel like yourself again.", contentType:"brand", productKind:"rx_compounded"},
     clean: {script:"Take a short online quiz, and a licensed provider will review your health history. If they determine treatment is right for you, your plan ships to your door. Compounded medications are not FDA-approved. Results vary.", caption:"Care that starts with a conversation.", contentType:"brand", productKind:"rx_compounded"}
   };
   var $ = function(id){ return document.getElementById(id); };
@@ -254,25 +258,39 @@ footer p{max-width:720px;margin:0 auto}
   function money(n){ n = Number(n)||0; return n < 0.01 ? "$" + n.toFixed(4) : "$" + n.toFixed(3); }
   function secs(ms){ return ((Number(ms)||0)/1000).toFixed(1) + " s"; }
 
-  // Tabs
+  // Tabs. Leaving a tab hides that tab's results; coming back shows them again.
   function selectTab(which){
     var check = which === "check";
-    $("tab-check").setAttribute("aria-selected", check);
-    $("tab-draft").setAttribute("aria-selected", !check);
+    $("tab-check").setAttribute("aria-selected", check ? "true" : "false");
+    $("tab-draft").setAttribute("aria-selected", check ? "false" : "true");
     $("panel-check").classList.toggle("hidden", !check);
     $("panel-draft").classList.toggle("hidden", check);
+    if (check) {
+      $("draft-out").classList.add("hidden");
+      if ($("result").dataset.ready === "1") $("result").classList.remove("hidden");
+    } else {
+      $("result").classList.add("hidden");
+      if ($("draft-out").dataset.ready === "1") $("draft-out").classList.remove("hidden");
+    }
   }
   $("tab-check").addEventListener("click", function(){ selectTab("check"); });
   $("tab-draft").addEventListener("click", function(){ selectTab("draft"); });
 
-  // Samples
+  // Samples set every field, then run. Dropdowns stay editable afterward.
   function fill(s){
-    $("script").value = s.script; $("caption").value = s.caption;
-    $("contentType").value = s.contentType; $("productKind").value = s.productKind;
+    $("script").value = s.script;
+    $("caption").value = s.caption;
+    $("contentType").value = s.contentType;
+    $("productKind").value = s.productKind;
     updateCount();
   }
   document.querySelectorAll("[data-sample]").forEach(function(b){
-    b.addEventListener("click", function(){ fill(SAMPLES[b.getAttribute("data-sample")]); });
+    b.addEventListener("click", function(){
+      var sample = SAMPLES[b.getAttribute("data-sample")];
+      if (!sample) return;
+      fill(sample);
+      runCheck();
+    });
   });
   function updateCount(){ $("script-count").textContent = $("script").value.length.toLocaleString(); }
   $("script").addEventListener("input", updateCount);
@@ -299,6 +317,12 @@ footer p{max-width:720px;margin:0 auto}
       if (q.length > 2 && out.indexOf(q) !== -1 && out.indexOf("<del>" + q) === -1) out = out.replace(q, "<del>" + q + "</del>");
     });
     return out;
+  }
+
+  function showPending(el, message){
+    el.dataset.ready = "1";
+    el.innerHTML = '<p class="pending" role="status"><span class="spinner dark" aria-hidden="true"></span>' + esc(message) + '</p>';
+    el.classList.remove("hidden");
   }
 
   function renderResult(r, input){
@@ -329,22 +353,33 @@ footer p{max-width:720px;margin:0 auto}
       h += '<div class="section-label">Escalation ticket (Zendesk create-ticket format, not sent)</div><pre class="ticket">' + esc(JSON.stringify(r.zendesk_ticket, null, 2)) + '</pre>';
     }
     var el = $("result");
+    el.dataset.ready = "1";
     el.innerHTML = h;
     el.classList.remove("hidden");
     el.scrollIntoView({behavior:"smooth", block:"start"});
     el.focus({preventScroll:true});
   }
 
-  $("check-form").addEventListener("submit", async function(e){
-    e.preventDefault();
+  async function runCheck(){
     var btn = $("check-btn"), err = $("check-error");
     err.classList.add("hidden");
     var input = {script:$("script").value.trim(), caption:$("caption").value.trim(), contentType:$("contentType").value, productKind:$("productKind").value};
     if (!input.script) return showError(err, "Please paste a script to check.");
+    showPending($("result"), "Checking...");
     busy(btn, true);
     try { renderResult(await post("/api/check", input), input); }
-    catch(ex){ showError(err, ex.message); }
+    catch(ex){
+      $("result").dataset.ready = "";
+      $("result").innerHTML = "";
+      $("result").classList.add("hidden");
+      showError(err, ex.message);
+    }
     finally { busy(btn, false, "Run compliance check"); }
+  }
+
+  $("check-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    runCheck();
   });
 
   $("draft-form").addEventListener("submit", async function(e){
@@ -353,6 +388,7 @@ footer p{max-width:720px;margin:0 auto}
     err.classList.add("hidden");
     var topic = $("topic").value.trim();
     if (!topic) return showError(err, "Please enter a topic.");
+    showPending(out, "Drafting...");
     busy(btn, true);
     try {
       var d = await post("/api/draft", {topic: topic});
@@ -362,13 +398,20 @@ footer p{max-width:720px;margin:0 auto}
         '<div class="section-label">Caption</div><p>' + esc(d.caption) + '</p>' +
         '<div class="pills"><span class="pill">Model <b>' + esc(d.model_used) + '</b></span><span class="pill">Cost <b>' + esc(money(d.cost_usd)) + '</b></span><span class="pill">Time <b>' + esc(secs(d.latency_ms)) + '</b></span></div>' +
         '<p style="margin-top:16px"><button class="btn ghost" type="button" id="send-to-check">Check this draft</button></p>';
-      out.innerHTML = h; out.classList.remove("hidden");
+      out.dataset.ready = "1";
+      out.innerHTML = h;
+      out.classList.remove("hidden");
       $("send-to-check").addEventListener("click", function(){
         fill({script:d.voiceover_script, caption:d.caption, contentType:"brand", productKind:$("productKind").value});
         selectTab("check");
-        $("workbench").scrollIntoView({behavior:"smooth", block:"start"});
+        runCheck();
       });
-    } catch(ex){ showError(err, ex.message); }
+    } catch(ex){
+      out.dataset.ready = "";
+      out.innerHTML = "";
+      out.classList.add("hidden");
+      showError(err, ex.message);
+    }
     finally { busy(btn, false, "Draft creative"); }
   });
 

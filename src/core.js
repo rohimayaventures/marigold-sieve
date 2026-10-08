@@ -201,6 +201,29 @@ export function applyGuardrails(input, result) {
   return { ...result, status, issues, rewritten_script: rewritten };
 }
 
+function normQuote(quote) {
+  return String(quote || '').trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function sameQuote(a, b) {
+  const left = normQuote(a);
+  const right = normQuote(b);
+  if (left === right) return true;
+  if (!left || !right) return false;
+  return left.includes(right) || right.includes(left);
+}
+
+// If the model and a rule-based check flag the same rule on the same quote, keep the rule-based issue.
+function dedupeIssues(issues) {
+  const kept = [];
+  for (const issue of issues) {
+    const idx = kept.findIndex((existing) => existing.rule === issue.rule && sameQuote(existing.quote, issue.quote));
+    if (idx === -1) kept.push(issue);
+    else if (issue.guardrail && !kept[idx].guardrail) kept[idx] = issue;
+  }
+  return kept;
+}
+
 function systemEscalation(reason) {
   return {
     status: 'escalate',
@@ -271,6 +294,7 @@ export async function reviewScript(config, input) {
   }
 
   final = applyGuardrails(input, final);
+  final = { ...final, issues: dedupeIssues(final.issues) };
 
   const inputTokens = calls.reduce((s, c) => s + c.inputTokens, 0);
   const outputTokens = calls.reduce((s, c) => s + c.outputTokens, 0);
