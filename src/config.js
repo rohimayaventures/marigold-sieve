@@ -6,7 +6,7 @@
 // CHEAP_PRICE_IN, CHEAP_PRICE_OUT, STRONG_PRICE_IN, STRONG_PRICE_OUT.
 export const DEFAULT_PRICES_PER_MTOK = {
   haiku: { in: 1.0, out: 5.0 },
-  sonnet: { in: 3.0, out: 15.0 },
+  sonnet: { in: 2.0, out: 10.0 },
   opus: { in: 5.0, out: 25.0 },
 };
 
