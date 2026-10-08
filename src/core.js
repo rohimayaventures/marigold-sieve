@@ -161,7 +161,7 @@ async function runReviewModel(config, model, input) {
 }
 
 // Deterministic checks after the model answer. They do not change the prompt or routing.
-const DISCLOSURE_RE = /#ad|paid partnership|#sponsored/i;
+const DISCLOSURE_RE = /#ad\b|paid partnership|#sponsored\b/i;
 const CLINICAL_RE = /\b(?:pregnant|pregnancy|breastfeeding)\b|trying to conceive|\b\d+(?:\.\d+)?\s*(?:milligrams|mcg|mg|units)\b|\b(?:dose|dosing)\b|side effect|\binteraction/i;
 
 export function applyGuardrails(input, result) {
