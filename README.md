@@ -42,7 +42,7 @@ Escalate to a human for dosing or medical advice, pregnancy, drug interactions, 
 
 <!-- EVAL:START -->
 
-Run: 10/7/2026, 8:56:25 PM CT. Cheap model `claude-haiku-4-5-20251001`, strong model `claude-sonnet-5-5`.
+Run: 10/8/2026, 5:42:32 PM CT. Cheap model `claude-haiku-4-5-20251001`, strong model `claude-sonnet-5-5`.
 
 | Metric | Result |
 |---|---|
@@ -51,8 +51,8 @@ Run: 10/7/2026, 8:56:25 PM CT. Cheap model `claude-haiku-4-5-20251001`, strong m
 | Planted rules identified | 23 of 24 |
 | Escalated to a human | 3 |
 | Routed to the strong model | 1 |
-| Average cost per script | $0.0022 (about $2.23 per 1,000 ads) |
-| Average time per script | 2.0 s |
+| Average cost per script | $0.0022 (about $2.2 per 1,000 ads) |
+| Average time per script | 2.1 s |
 
 | ID | Expected | Got | Model | Rules planted | Rules found | Correct |
 |---|---|---|---|---|---|---|
@@ -65,7 +65,7 @@ Run: 10/7/2026, 8:56:25 PM CT. Cheap model `claude-haiku-4-5-20251001`, strong m
 | T07 | flag | fix | claude-haiku-4-5-20251001 | R8 | R8 | Yes |
 | T08 | flag | fix | claude-haiku-4-5-20251001 | R7 | R7, R2 | Yes |
 | T09 | flag | fix | claude-haiku-4-5-20251001 | R9 | R9 | Yes |
-| T10 | flag | escalate | claude-sonnet-5-5 (routed) | ESCALATE | ESCALATE, R5, R3 | Yes |
+| T10 | flag | escalate | claude-sonnet-5-5 (routed) | ESCALATE | ESCALATE, R3, R5 | Yes |
 | T11 | flag | fix | claude-haiku-4-5-20251001 | R2, ESCALATE | R2 | Yes |
 | T12 | flag | fix | claude-haiku-4-5-20251001 | R1 | R1 | Yes |
 | T13 | flag | fix | claude-haiku-4-5-20251001 | R7, R3, R6, R5 | R7, R1, R3, R5, R6 | Yes |

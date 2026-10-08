@@ -2,7 +2,7 @@
 export default {
   "status": "ok",
   "mock": false,
-  "ran_at": "2026-10-08T01:56:25.280Z",
+  "ran_at": "2026-10-08T22:42:32.115Z",
   "cheap_model": "claude-haiku-4-5-20251001",
   "strong_model": "claude-sonnet-5-5",
   "violations_caught": 15,
@@ -13,9 +13,9 @@ export default {
   "planted_rules_total": 24,
   "escalated": 3,
   "routed_to_strong": 1,
-  "avg_cost_usd": 0.00223,
-  "cost_per_1000_ads_usd": 2.23,
-  "avg_latency_ms": 1988,
+  "avg_cost_usd": 0.002198,
+  "cost_per_1000_ads_usd": 2.2,
+  "avg_latency_ms": 2075,
   "rows": [
     {
       "id": "T01",
@@ -34,8 +34,8 @@ export default {
         "R9"
       ],
       "correct": true,
-      "cost": 0.00266,
-      "ms": 3334
+      "cost": 0.002625,
+      "ms": 3762
     },
     {
       "id": "T02",
@@ -54,7 +54,7 @@ export default {
       ],
       "correct": true,
       "cost": 0.00267,
-      "ms": 3381
+      "ms": 3784
     },
     {
       "id": "T03",
@@ -71,7 +71,7 @@ export default {
       ],
       "correct": true,
       "cost": 0.001255,
-      "ms": 945
+      "ms": 1427
     },
     {
       "id": "T04",
@@ -91,7 +91,7 @@ export default {
       ],
       "correct": true,
       "cost": 0.002397,
-      "ms": 2669
+      "ms": 2676
     },
     {
       "id": "T05",
@@ -108,7 +108,7 @@ export default {
       ],
       "correct": true,
       "cost": 0.001742,
-      "ms": 1583
+      "ms": 1593
     },
     {
       "id": "T06",
@@ -126,7 +126,7 @@ export default {
       ],
       "correct": true,
       "cost": 0.001859,
-      "ms": 1621
+      "ms": 1589
     },
     {
       "id": "T07",
@@ -142,8 +142,8 @@ export default {
         "R8"
       ],
       "correct": true,
-      "cost": 0.001782,
-      "ms": 1510
+      "cost": 0.001792,
+      "ms": 1647
     },
     {
       "id": "T08",
@@ -161,7 +161,7 @@ export default {
       ],
       "correct": true,
       "cost": 0.002336,
-      "ms": 2728
+      "ms": 2733
     },
     {
       "id": "T09",
@@ -178,7 +178,7 @@ export default {
       ],
       "correct": true,
       "cost": 0.001915,
-      "ms": 1608
+      "ms": 1635
     },
     {
       "id": "T10",
@@ -192,12 +192,12 @@ export default {
       ],
       "found": [
         "ESCALATE",
-        "R5",
-        "R3"
+        "R3",
+        "R5"
       ],
       "correct": true,
-      "cost": 0.009106,
-      "ms": 6250
+      "cost": 0.008476,
+      "ms": 5083
     },
     {
       "id": "T11",
@@ -214,8 +214,8 @@ export default {
         "R2"
       ],
       "correct": true,
-      "cost": 0.00183,
-      "ms": 1683
+      "cost": 0.00188,
+      "ms": 1776
     },
     {
       "id": "T12",
@@ -231,8 +231,8 @@ export default {
         "R1"
       ],
       "correct": true,
-      "cost": 0.00184,
-      "ms": 1632
+      "cost": 0.00185,
+      "ms": 1829
     },
     {
       "id": "T13",
@@ -255,8 +255,8 @@ export default {
         "R6"
       ],
       "correct": true,
-      "cost": 0.003235,
-      "ms": 3892
+      "cost": 0.00321,
+      "ms": 4059
     },
     {
       "id": "T14",
@@ -273,7 +273,7 @@ export default {
       ],
       "correct": true,
       "cost": 0.001221,
-      "ms": 629
+      "ms": 612
     },
     {
       "id": "T15",
@@ -293,8 +293,8 @@ export default {
         "R9"
       ],
       "correct": true,
-      "cost": 0.002543,
-      "ms": 3023
+      "cost": 0.002523,
+      "ms": 3356
     },
     {
       "id": "C01",
@@ -307,7 +307,7 @@ export default {
       "found": [],
       "correct": true,
       "cost": 0.001246,
-      "ms": 628
+      "ms": 679
     },
     {
       "id": "C02",
@@ -320,7 +320,7 @@ export default {
       "found": [],
       "correct": true,
       "cost": 0.001241,
-      "ms": 666
+      "ms": 1207
     },
     {
       "id": "C03",
@@ -333,7 +333,7 @@ export default {
       "found": [],
       "correct": true,
       "cost": 0.001256,
-      "ms": 662
+      "ms": 766
     },
     {
       "id": "C04",
@@ -346,7 +346,7 @@ export default {
       "found": [],
       "correct": true,
       "cost": 0.001232,
-      "ms": 683
+      "ms": 573
     },
     {
       "id": "C05",
@@ -359,7 +359,7 @@ export default {
       "found": [],
       "correct": true,
       "cost": 0.001238,
-      "ms": 632
+      "ms": 705
     }
   ]
 };
